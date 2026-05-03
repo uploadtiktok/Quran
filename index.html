@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>مجمع التلاوات الحضاري</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --deep-emerald: #022c22;
@@ -14,13 +14,13 @@
             --soft-cream: #fdfaf3;
         }
         body {
-            font-family: 'Aref Ruqaa', serif;
+            font-family: 'Amiri', serif;
             min-height: 100vh;
             background: linear-gradient(135deg, #022c22 0%, #064e3b 100%);
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             padding: 20px;
             margin: 0;
             color: var(--soft-cream);
@@ -35,19 +35,20 @@
         }
         .main-card {
             width: 100%;
-            max-width: 450px;
+            max-width: 500px;
             background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(15px);
             border: 1px solid rgba(197, 160, 89, 0.3);
             border-radius: 40px;
-            padding: 50px 30px;
+            padding: 30px;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
             position: relative;
+            margin-top: 10px;
         }
         .main-card::after {
             content: "";
             position: absolute;
-            inset: 15px;
+            inset: 12px;
             border: 1px solid rgba(197, 160, 89, 0.15);
             border-radius: 30px;
             pointer-events: none;
@@ -57,52 +58,59 @@
             background: linear-gradient(to bottom, #fdfaf3, #c5a059);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
+            font-weight: 700;
+            text-align: center;
         }
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             position: relative;
         }
         .form-label {
             display: block;
-            font-size: 0.9rem;
+            font-size: 1.1rem;
             color: var(--royal-gold);
-            margin-bottom: 8px;
-            margin-right: 15px;
-            letter-spacing: 1px;
+            margin-bottom: 6px;
+            margin-right: 10px;
         }
         select {
             width: 100%;
-            background: rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(197, 160, 89, 0.2);
-            border-radius: 18px;
-            padding: 15px 20px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1.5px solid rgba(197, 160, 89, 0.3);
+            border-radius: 12px;
+            padding: 0 15px;
             color: #fff;
             font-size: 1.1rem;
             outline: none;
             cursor: pointer;
             transition: all 0.3s ease;
             appearance: none;
+            height: 48px;
+        }
+        select option {
+            background: #022c22;
+            color: #fff;
         }
         select:focus {
             border-color: var(--royal-gold);
-            background: rgba(197, 160, 89, 0.05);
+            background: rgba(197, 160, 89, 0.1);
         }
         .btn-generate {
             width: 100%;
             background: linear-gradient(45deg, #c5a059, #e2c28a);
             color: #022c22;
             font-weight: 700;
-            padding: 20px;
-            border-radius: 20px;
+            padding: 15px;
+            border-radius: 15px;
             font-size: 1.2rem;
-            margin-top: 20px;
+            margin-top: 10px;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            border: none;
         }
         .btn-generate:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(197, 160, 89, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(197, 160, 89, 0.3);
         }
         audio {
             width: 100%;
@@ -114,11 +122,11 @@
             text-align: center;
             margin-top: 15px;
             color: var(--royal-gold);
-            font-size: 0.9rem;
+            font-size: 1.1rem;
         }
         .progress-bar-container {
             width: 100%;
-            height: 4px;
+            height: 6px;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 10px;
             margin-top: 10px;
@@ -135,10 +143,10 @@
 <body>
 
     <div class="main-card">
-        <div class="text-center mb-10">
+        <div class="text-center mb-6">
             <h1 class="header-title">مجمع التلاوات</h1>
-            <div class="w-12 h-1 bg-royal-gold mx-auto mb-2 opacity-50 rounded-full"></div>
-            <p class="text-xs uppercase tracking-widest opacity-60">توليد ملفات صوتية للآيات الكريمة</p>
+            <div class="w-16 h-1 bg-royal-gold mx-auto mb-2 opacity-50 rounded-full"></div>
+            <p class="text-sm tracking-widest opacity-70">توليد ملفات صوتية للآيات الكريمة</p>
         </div>
 
         <div class="form-group">
@@ -165,7 +173,7 @@
         <button id="mergeBtn" class="btn-generate">توليد المقطع الصوتي</button>
 
         <div id="statusBox" class="status-indicator">
-            <span>جاري معالجة الآيات الكريمة... <span id="progressPercent">0%</span></span>
+            <span>جاري معالجة الآيات... <span id="progressPercent">0%</span></span>
             <div class="progress-bar-container">
                 <div id="progressFill" class="progress-bar-fill"></div>
             </div>
@@ -181,14 +189,34 @@
             { id: "Yasser_Ad-Dussary_128kbps", name: "ياسر الدوسري" },
             { id: "MaherAlMuaiqly128kbps", name: "ماهر المعيقلي" },
             { id: "Abu%20Bakr%20Ash-Shaatree_128kbps", name: "أبوبكر الشاطري" },
-            { id: "Ibrahim_Akhdar_32kbps", name: "إبراهيم الأخضر" },
             { id: "Ahmed_ibn_Ali_al-Ajamy_128kbps_ketaballah.net", name: "أحمد العجمي" },
             { id: "Abdul_Basit_Murattal_192kbps", name: "عبد الباسط عبد الصمد" },
             { id: "Abdurrahmaan_As-Sudais_192kbps", name: "عبد الرحمن السديس" },
             { id: "Fares_Abbad_64kbps", name: "فارس عباد" },
             { id: "Husary_128kbps", name: "محمود خليل الحصري" },
             { id: "Minshawy_Murattal_128kbps", name: "محمد صديق المنشاوي" },
-            { id: "Alafasy_128kbps", name: "مشاري العفاسي" }
+            { id: "Alafasy_128kbps", name: "مشاري العفاسي" },
+            { id: "Ibrahim_Akhdar_32kbps", name: "إبراهيم الأخضر" },
+            { id: "Saood_ash-Shuraym_128kbps", name: "سعود الشريم" },
+            { id: "Ali_Jaber_64kbps", name: "علي جابر" },
+            { id: "Mohammad_al_Tablaway_128kbps", name: "محمد محمود الطبلاوي" },
+            { id: "Sahl_Yassin_128kbps", name: "سهل ياسين" },
+            { id: "Salaah_Abdul_Rahman_Bukhatir_128kbps", name: "صلاح بو خاطر" },
+            { id: "Salah_Al_Budair_128kbps", name: "صلاح البدير" },
+            { id: "Saad_al-Ghamidi_64kbps", name: "سعد الغامدي" },
+            { id: "Nasser_Alqatami_128kbps", name: "ناصر القطامي" },
+            { id: "Kahlifa_al_Tunaiji_64kbps", name: "خليفة الطنيجي" },
+            { id: "Hani_Rifai_192kbps", name: "هاني الرفاعي" },
+            { id: "Abdul_Basit_Mujawwad_128kbps", name: "عبد الباسط (مجود)" },
+            { id: "Minshawy_Mujawwad_128kbps", name: "المنشاوي (مجود)" },
+            { id: "Husary_Mujawwad_64kbps", name: "الحصري (مجود)" },
+            { id: "Abdullah_Basfar_192kbps", name: "عبد الله بصفر" },
+            { id: "Abdullah_Matroud_128kbps", name: "عبد الله المطرود" },
+            { id: "Akram_AlAlaqmy_128kbps", name: "أكرم العلاقمي" },
+            { id: "Ghamadi_40kbps", name: "سعد الغامدي (نسخة 2)" },
+            { id: "Ali_Hafiz_128kbps", name: "علي الحذيفي" },
+            { id: "Mahmoud_Ali_Al_Banna_32kbps", name: "محمود علي البنا" },
+            { id: "Ayman_Sowaid_64kbps", name: "أيمن رشدي سويد" }
         ];
 
         const surahSelect = document.getElementById('surahSelect');
@@ -205,7 +233,14 @@
         let audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
         async function init() {
-            reciters.forEach(r => {
+            const prioritizedId = "Yasser_Ad-Dussary_128kbps";
+            const prioritizedReciter = reciters.find(r => r.id === prioritizedId);
+            const otherReciters = reciters.filter(r => r.id !== prioritizedId)
+                                          .sort((a, b) => a.name.localeCompare(b.name, 'ar'));
+            
+            const sortedReciters = [prioritizedReciter, ...otherReciters];
+
+            sortedReciters.forEach(r => {
                 const opt = document.createElement('option');
                 opt.value = r.id;
                 opt.textContent = r.name;
@@ -255,7 +290,7 @@
         function getAudioUrl(reciter, surah, ayah) {
             const s = surah.toString().padStart(3, '0');
             const a = ayah.toString().padStart(3, '0');
-            return reciter.startsWith('http') ? `${reciter}${s}${a}.mp3` : `https://www.everyayah.com/data/${reciter}/${s}${a}.mp3`;
+            return `https://www.everyayah.com/data/${reciter}/${s}${a}.mp3`;
         }
 
         mergeBtn.onclick = async () => {
@@ -346,4 +381,3 @@
     </script>
 </body>
 </html>
-
