@@ -1,146 +1,177 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>مجمع التلاوات</title>
+    <title>مجمع التلاوات الملكي</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Reem+Kufi:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --gold-primary: #d4af37;
+            --gold-dark: #aa841e;
+            --bg-dark: #050505;
+            --card-bg: #0f0f0f;
+        }
         body {
-            font-family: 'Tajawal', sans-serif;
+            font-family: 'Reem Kufi', sans-serif;
             height: 100vh;
-            overflow: hidden;
+            overflow-y: auto;
             display: flex;
             flex-direction: column;
             margin: 0;
-            background: white;
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(circle at center, rgba(212, 175, 55, 0.05) 0%, transparent 70%),
+                url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l2.5 12.5L45 15l-12.5 2.5L30 30l-2.5-12.5L15 15l12.5-2.5z' fill='%23d4af37' fill-opacity='0.03'/%3E%3C/svg%3E");
         }
         .quran-font {
             font-family: 'Amiri', serif;
         }
-        .content-area {
-            flex: 1;
+        .top-section {
+            padding: 15px 10px;
+            width: 100%;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            padding: 20px;
-            width: 100%;
         }
-        .inputs-wrapper {
-            width: 100%;
-            max-width: 400px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
+        .islamic-border {
             position: relative;
-            padding: 30px;
-            border: 1px solid #d4af37;
+            width: 95%;
+            max-width: 400px;
+            padding: 20px;
+            background: var(--card-bg);
             border-radius: 20px;
+            border: 1.5px solid var(--gold-primary);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.1);
+            margin-top: 10px;
         }
-        .inputs-wrapper::before {
+        .islamic-border::before {
             content: "";
             position: absolute;
-            top: 5px;
-            left: 5px;
-            right: 5px;
-            bottom: 5px;
-            border: 1px solid #d4af37;
-            border-radius: 15px;
+            top: 6px;
+            left: 6px;
+            right: 6px;
+            bottom: 6px;
+            border: 1px solid var(--gold-dark);
+            border-radius: 16px;
             pointer-events: none;
-            opacity: 0.3;
+            opacity: 0.2;
         }
+        .corner-decoration {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border: 2px solid var(--gold-primary);
+        }
+        .top-right { top: -4px; right: -4px; border-bottom: none; border-left: none; border-radius: 0 10px 0 0; }
+        .top-left { top: -4px; left: -4px; border-bottom: none; border-right: none; border-radius: 10px 0 0 0; }
+        .bottom-right { bottom: -4px; right: -4px; border-top: none; border-left: none; border-radius: 0 0 10px 0; }
+        .bottom-left { bottom: -4px; left: -4px; border-top: none; border-right: none; border-radius: 0 0 0 10px; }
+
         select {
             appearance: none;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23d4af37'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
             background-repeat: no-repeat;
-            background-position: left 0.75rem center;
+            background-position: left 0.8rem center;
             background-size: 1rem;
-            border: 1px solid #e5e7eb;
-            padding: 10px;
-            border-radius: 8px;
+            border: 1px solid #2a2a2a;
+            padding: 12px;
+            border-radius: 10px;
             width: 100%;
-            font-size: 14px;
-            background-color: #fff;
-            outline-color: #d4af37;
+            font-size: 16px;
+            background-color: #151515;
+            color: #ffffff !important;
+            outline: none;
         }
-        .bottom-controls {
+        .bottom-section {
             width: 100%;
             max-width: 400px;
             margin: 0 auto;
-            padding: 10px 20px 30px 20px;
+            padding: 15px 20px 30px;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 15px;
         }
         #mergeBtn {
-            background: #111;
-            color: #d4af37;
+            background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+            color: #000;
             padding: 18px;
-            border-radius: 12px;
+            border-radius: 15px;
             font-weight: bold;
             width: 100%;
-            border: 1px solid #d4af37;
-            font-size: 16px;
-        }
-        #mergeBtn:disabled {
-            opacity: 0.5;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.2);
         }
         audio {
             width: 100%;
-            height: 40px;
+            height: 45px;
+            filter: invert(100%) hue-rotate(180deg) brightness(1.2);
+            border-radius: 20px;
         }
-        .islamic-decoration {
-            color: #d4af37;
-            font-size: 24px;
-            margin-bottom: 10px;
+        label {
+            color: var(--gold-primary);
+            margin-bottom: 6px;
+            display: block;
+            font-size: 13px;
+        }
+        .title-glow {
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
         }
     </style>
 </head>
 <body>
 
-    <div class="content-area">
-        <div class="inputs-wrapper">
-            <div class="text-center islamic-decoration">
-                <span class="quran-font">﷽</span>
-            </div>
-            
-            <h1 class="text-center text-2xl font-bold mb-4 quran-font text-emerald-900">مجمع التلاوات</h1>
+    <div class="top-section">
+        <div class="text-center mb-4">
+            <div class="quran-font text-5xl text-amber-500 mb-2">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</div>
+            <h1 class="text-2xl font-bold quran-font text-white title-glow">مجمع التلاوات العطرة</h1>
+        </div>
 
-            <div>
-                <label class="block text-[10px] text-amber-700 font-bold mb-1 mr-1">اختر القارئ</label>
-                <select id="reciterSelect"></select>
-            </div>
+        <div class="islamic-border">
+            <div class="corner-decoration top-right"></div>
+            <div class="corner-decoration top-left"></div>
+            <div class="corner-decoration bottom-right"></div>
+            <div class="corner-decoration bottom-left"></div>
 
-            <div>
-                <label class="block text-[10px] text-amber-700 font-bold mb-1 mr-1">اختر السورة</label>
-                <select id="surahSelect" class="quran-font text-lg"></select>
-            </div>
-
-            <div class="grid grid-cols-2 gap-4">
+            <div class="space-y-4">
                 <div>
-                    <label class="block text-[10px] text-amber-700 font-bold mb-1 mr-1">من الآية</label>
-                    <select id="startAyah"></select>
+                    <label>القارئ</label>
+                    <select id="reciterSelect"></select>
                 </div>
+
                 <div>
-                    <label class="block text-[10px] text-amber-700 font-bold mb-1 mr-1">إلى الآية</label>
-                    <select id="endAyah"></select>
+                    <label>السورة</label>
+                    <select id="surahSelect" class="quran-font"></select>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label>من الآية</label>
+                        <select id="startAyah"></select>
+                    </div>
+                    <div>
+                        <label>إلى الآية</label>
+                        <select id="endAyah"></select>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="bottom-controls">
-        <div id="statusBox" class="hidden text-center text-xs text-amber-800 font-bold mb-2">
-            جاري المعالجة والدمج... <span id="progressPercent">0%</span>
+    <div class="bottom-section">
+        <div id="statusBox" class="hidden text-center text-sm text-amber-400 font-bold animate-pulse">
+             جاري جمع الآيات... <span id="progressPercent">0%</span>
         </div>
 
-        <div id="playerBox" class="hidden transition-all duration-500">
+        <div id="playerBox" class="hidden">
             <audio id="mainAudio" controls></audio>
         </div>
 
-        <button id="mergeBtn" class="quran-font">توليد المقطع الصوتي المبارك</button>
+        <button id="mergeBtn" class="quran-font">بِدء التوليد</button>
     </div>
 
     <script>
@@ -154,28 +185,16 @@
             { id: "https://ia803100.us.archive.org/12/items/Bandar_Baleela_128kbps_Everyayah/", name: "بندر بليلة" },
             { id: "Saood%20bin%20Ibraaheem%20Ash-Shuraym_128kbps", name: "سعود الشريم" },
             { id: "Ghamadi_40kbps", name: "سعد الغامدي" },
-            { id: "Abdul_Basit_Murattal_192kbps", name: "عبدالباسط عبدالصمد مرتل" },
-            { id: "Abdul_Basit_Mujawwad_128kbps", name: "عبدالباسط عبدالصمد مجود" },
-            { id: "https://ia903107.us.archive.org/29/items/Abdulaziz_Bin_Saleh_Al-Zahrani_128kbps_Everyayah/", name: "عبد العزيز الزهراني" },
+            { id: "Abdul_Basit_Murattal_192kbps", name: "عبدالباسط مرتل" },
+            { id: "Abdul_Basit_Mujawwad_128kbps", name: "عبدالباسط مجود" },
             { id: "Abdurrahmaan_As-Sudais_192kbps", name: "عبدالرحمن السديس" },
             { id: "Abdullah_Basfar_192kbps", name: "عبدالله بصفر" },
-            { id: "Abdullaah_3awwaad_Al-Juhaynee_128kbps", name: "عبد الله عواد الجهني" },
             { id: "Ali_Jaber_64kbps", name: "علي جابر" },
             { id: "Hudhaify_128kbps", name: "علي الحذيفي" },
             { id: "Fares_Abbad_64kbps", name: "فارس عباد" },
-            { id: "khalefa_al_tunaiji_64kbps", name: "خليفة الطنيجي" },
-            { id: "Husary_128kbps_Mujawwad", name: "محمود خليل الحصري مجود" },
-            { id: "Husary_128kbps", name: "محمود خليل الحصري مرتل" },
-            { id: "Minshawy_Mujawwad_192kbps", name: "محمد صديق المنشاوي مجود" },
-            { id: "Minshawy_Murattal_128kbps", name: "محمد صديق المشاوي مرتل" },
-            { id: "Mohammad_al_Tablaway_128kbps", name: "محمد الطبلاوي" },
-            { id: "Muhammad_Ayyoub_128kbps", name: "محمد أيوب" },
-            { id: "Muhammad_Jibreel_128kbps", name: "محمد جبريل" },
-            { id: "https://ia802809.us.archive.org/9/items/Mahmood_Ali_Albana_128kbps_Everyayah/", name: "محمود علي البنا" },
-            { id: "Alafasy_128kbps", name: "مشاري العفاسي" },
-            { id: "https://ia803107.us.archive.org/32/items/Mostafa_Ismaeel_128kbps_Everyayah/", name: "مصطفى اسماعيل" },
-            { id: "Nasser_Alqatami_128kbps", name: "ناصر القطامي" },
-            { id: "Hani_Rifai_192kbps", name: "هاني الرفاعي" }
+            { id: "Husary_128kbps", name: "محمود خليل الحصري" },
+            { id: "Minshawy_Murattal_128kbps", name: "محمد صديق المنشاوي" },
+            { id: "Alafasy_128kbps", name: "مشاري العفاسي" }
         ];
 
         const surahSelect = document.getElementById('surahSelect');
