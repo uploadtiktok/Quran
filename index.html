@@ -1,118 +1,209 @@
-html
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مدمج التلاوات الشامل</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>مجمع التلاوات</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap');
-        body { font-family: 'Tajawal', sans-serif; background-color: #f8fafc; }
-        select { max-height: 200px; }
+        body {
+            font-family: 'Tajawal', sans-serif;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+            background: white;
+        }
+        .quran-font {
+            font-family: 'Amiri', serif;
+        }
+        .content-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            width: 100%;
+        }
+        .inputs-wrapper {
+            width: 100%;
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            position: relative;
+            padding: 30px;
+            border: 1px solid #d4af37;
+            border-radius: 20px;
+        }
+        .inputs-wrapper::before {
+            content: "";
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            bottom: 5px;
+            border: 1px solid #d4af37;
+            border-radius: 15px;
+            pointer-events: none;
+            opacity: 0.3;
+        }
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23d4af37'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: left 0.75rem center;
+            background-size: 1rem;
+            border: 1px solid #e5e7eb;
+            padding: 10px;
+            border-radius: 8px;
+            width: 100%;
+            font-size: 14px;
+            background-color: #fff;
+            outline-color: #d4af37;
+        }
+        .bottom-controls {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 10px 20px 30px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        #mergeBtn {
+            background: #111;
+            color: #d4af37;
+            padding: 18px;
+            border-radius: 12px;
+            font-weight: bold;
+            width: 100%;
+            border: 1px solid #d4af37;
+            font-size: 16px;
+        }
+        #mergeBtn:disabled {
+            opacity: 0.5;
+        }
+        audio {
+            width: 100%;
+            height: 40px;
+        }
+        .islamic-decoration {
+            color: #d4af37;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
-<body class="min-h-screen flex items-center justify-center p-4">
+<body>
 
-    <div class="bg-white p-8 rounded-3xl shadow-xl w-full max-w-lg border border-emerald-100">
-        <div class="text-center mb-8">
-            <h1 class="text-2xl font-bold text-emerald-800 mb-2">توليد المقطع المدمج</h1>
-        </div>
+    <div class="content-area">
+        <div class="inputs-wrapper">
+            <div class="text-center islamic-decoration">
+                <span class="quran-font">﷽</span>
+            </div>
+            
+            <h1 class="text-center text-2xl font-bold mb-4 quran-font text-emerald-900">مجمع التلاوات</h1>
 
-        <div class="space-y-5">
             <div>
-                <label class="block text-sm font-bold text-gray-700 mb-2">اختر القارئ</label>
-                <select id="reciterSelect" class="w-full p-3 rounded-xl border-2 border-gray-50 focus:border-emerald-500 outline-none transition-all">
-                    <option value="Yasser_Ad-Dussary_128kbps">1. ياسر الدوسري</option>
-                    <option value="MaherAlMuaiqly128kbps">2. ماهر المعيقلي</option>
-                    <option value="Abu%20Bakr%20Ash-Shaatree_128kbps">3. ابوبكر الشاطري</option>
-                    <option value="Ibrahim_Akhdar_32kbps">4. ابراهيم الاخضر</option>
-                    <option value="Ahmed_ibn_Ali_al-Ajamy_128kbps_ketaballah.net">5. احمد العجمي</option>
-                    <option value="https://ia800502.us.archive.org/12/items/Ayman_Sowaid_64kbps---6236---ayat/">6. أيمن رشدي سويد</option>
-                    <option value="https://ia803100.us.archive.org/12/items/Bandar_Baleela_128kbps_Everyayah/">7. بندر بليلة</option>
-                    <option value="Saood%20bin%20Ibraaheem%20Ash-Shuraym_128kbps">8. سعود الشريم</option>
-                    <option value="Ghamadi_40kbps">9. سعد الغامدي</option>
-                    <option value="Abdul_Basit_Murattal_192kbps">10. عبدالباسط عبدالصمد مرتل</option>
-                    <option value="Abdul_Basit_Mujawwad_128kbps">11. عبدالباسط عبدالصمد مجود</option>
-                    <option value="https://ia903107.us.archive.org/29/items/Abdulaziz_Bin_Saleh_Al-Zahrani_128kbps_Everyayah/">12. عبد العزيز الزهراني</option>
-                    <option value="Abdurrahmaan_As-Sudais_192kbps">13. عبدالرحمن السديس</option>
-                    <option value="Abdullah_Basfar_192kbps">14. عبدالله بصفر</option>
-                    <option value="Abdullaah_3awwaad_Al-Juhaynee_128kbps">15. عبد الله عواد الجهني</option>
-                    <option value="Ali_Jaber_64kbps">16. علي جابر</option>
-                    <option value="Hudhaify_128kbps">17. علي الحذيفي</option>
-                    <option value="Fares_Abbad_64kbps">18. فارس عباد</option>
-                    <option value="khalefa_al_tunaiji_64kbps">19. خليفة الطنيجي</option>
-                    <option value="Husary_128kbps_Mujawwad">20. محمود خليل الحصري مجود</option>
-                    <option value="Husary_128kbps">21. محمود خليل الحصري مرتل</option>
-                    <option value="Minshawy_Mujawwad_192kbps">22. محمد صديق المنشاوي مجود</option>
-                    <option value="Minshawy_Murattal_128kbps">23. محمد صديق المشاوي مرتل</option>
-                    <option value="Mohammad_al_Tablaway_128kbps">24. محمد الطبلاوي</option>
-                    <option value="Muhammad_Ayyoub_128kbps">25. محمد أيوب</option>
-                    <option value="Muhammad_Jibreel_128kbps">26. محمد جبريل</option>
-                    <option value="https://ia802809.us.archive.org/9/items/Mahmood_Ali_Albana_128kbps_Everyayah/">27. محمود علي البنا</option>
-                    <option value="Alafasy_128kbps">28. مشاري العفاسي</option>
-                    <option value="https://ia803107.us.archive.org/32/items/Mostafa_Ismaeel_128kbps_Everyayah/">29. مصطفى اسماعيل</option>
-                    <option value="Nasser_Alqatami_128kbps">30. ناصر القطامي</option>
-                    <option value="Hani_Rifai_192kbps">31. هاني الرفاعي</option>
-                </select>
+                <label class="block text-[10px] text-amber-700 font-bold mb-1 mr-1">اختر القارئ</label>
+                <select id="reciterSelect"></select>
             </div>
 
             <div>
-                <label class="block text-sm font-bold text-gray-700 mb-2">السورة</label>
-                <select id="surahSelect" class="w-full p-3 rounded-xl border-2 border-gray-50 focus:border-emerald-500 outline-none transition-all"></select>
+                <label class="block text-[10px] text-amber-700 font-bold mb-1 mr-1">اختر السورة</label>
+                <select id="surahSelect" class="quran-font text-lg"></select>
             </div>
 
             <div class="grid grid-cols-2 gap-4">
                 <div>
-                    <label class="block text-sm font-bold text-gray-700 mb-2">من آية</label>
-                    <select id="startAyah" class="w-full p-3 rounded-xl border-2 border-gray-50 focus:border-emerald-500 outline-none text-center"></select>
+                    <label class="block text-[10px] text-amber-700 font-bold mb-1 mr-1">من الآية</label>
+                    <select id="startAyah"></select>
                 </div>
                 <div>
-                    <label class="block text-sm font-bold text-gray-700 mb-2">إلى آية</label>
-                    <select id="endAyah" class="w-full p-3 rounded-xl border-2 border-gray-50 focus:border-emerald-500 outline-none text-center"></select>
+                    <label class="block text-[10px] text-amber-700 font-bold mb-1 mr-1">إلى الآية</label>
+                    <select id="endAyah"></select>
                 </div>
             </div>
-
-            <button id="mergeBtn" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 rounded-2xl shadow-lg transition-all flex items-center justify-center gap-2">
-                <i class="fas fa-magic"></i>
-                توليد المقطع المدمج
-            </button>
-        </div>
-
-        <div id="statusBox" class="hidden mt-6">
-            <div class="w-full bg-gray-100 rounded-full h-2 mb-2">
-                <div id="progressBar" class="bg-emerald-500 h-2 rounded-full transition-all" style="width: 0%"></div>
-            </div>
-            <p id="statusText" class="text-center text-xs text-emerald-600 font-bold"></p>
-        </div>
-
-        <div id="playerBox" class="hidden mt-8 p-4 text-center">
-            <audio id="mainAudio" class="w-full" controls></audio>
         </div>
     </div>
 
+    <div class="bottom-controls">
+        <div id="statusBox" class="hidden text-center text-xs text-amber-800 font-bold mb-2">
+            جاري المعالجة والدمج... <span id="progressPercent">0%</span>
+        </div>
+
+        <div id="playerBox" class="hidden transition-all duration-500">
+            <audio id="mainAudio" controls></audio>
+        </div>
+
+        <button id="mergeBtn" class="quran-font">توليد المقطع الصوتي المبارك</button>
+    </div>
+
     <script>
+        const reciters = [
+            { id: "Yasser_Ad-Dussary_128kbps", name: "ياسر الدوسري" },
+            { id: "MaherAlMuaiqly128kbps", name: "ماهر المعيقلي" },
+            { id: "Abu%20Bakr%20Ash-Shaatree_128kbps", name: "ابوبكر الشاطري" },
+            { id: "Ibrahim_Akhdar_32kbps", name: "ابراهيم الاخضر" },
+            { id: "Ahmed_ibn_Ali_al-Ajamy_128kbps_ketaballah.net", name: "احمد العجمي" },
+            { id: "https://ia800502.us.archive.org/12/items/Ayman_Sowaid_64kbps---6236---ayat/", name: "أيمن رشدي سويد" },
+            { id: "https://ia803100.us.archive.org/12/items/Bandar_Baleela_128kbps_Everyayah/", name: "بندر بليلة" },
+            { id: "Saood%20bin%20Ibraaheem%20Ash-Shuraym_128kbps", name: "سعود الشريم" },
+            { id: "Ghamadi_40kbps", name: "سعد الغامدي" },
+            { id: "Abdul_Basit_Murattal_192kbps", name: "عبدالباسط عبدالصمد مرتل" },
+            { id: "Abdul_Basit_Mujawwad_128kbps", name: "عبدالباسط عبدالصمد مجود" },
+            { id: "https://ia903107.us.archive.org/29/items/Abdulaziz_Bin_Saleh_Al-Zahrani_128kbps_Everyayah/", name: "عبد العزيز الزهراني" },
+            { id: "Abdurrahmaan_As-Sudais_192kbps", name: "عبدالرحمن السديس" },
+            { id: "Abdullah_Basfar_192kbps", name: "عبدالله بصفر" },
+            { id: "Abdullaah_3awwaad_Al-Juhaynee_128kbps", name: "عبد الله عواد الجهني" },
+            { id: "Ali_Jaber_64kbps", name: "علي جابر" },
+            { id: "Hudhaify_128kbps", name: "علي الحذيفي" },
+            { id: "Fares_Abbad_64kbps", name: "فارس عباد" },
+            { id: "khalefa_al_tunaiji_64kbps", name: "خليفة الطنيجي" },
+            { id: "Husary_128kbps_Mujawwad", name: "محمود خليل الحصري مجود" },
+            { id: "Husary_128kbps", name: "محمود خليل الحصري مرتل" },
+            { id: "Minshawy_Mujawwad_192kbps", name: "محمد صديق المنشاوي مجود" },
+            { id: "Minshawy_Murattal_128kbps", name: "محمد صديق المشاوي مرتل" },
+            { id: "Mohammad_al_Tablaway_128kbps", name: "محمد الطبلاوي" },
+            { id: "Muhammad_Ayyoub_128kbps", name: "محمد أيوب" },
+            { id: "Muhammad_Jibreel_128kbps", name: "محمد جبريل" },
+            { id: "https://ia802809.us.archive.org/9/items/Mahmood_Ali_Albana_128kbps_Everyayah/", name: "محمود علي البنا" },
+            { id: "Alafasy_128kbps", name: "مشاري العفاسي" },
+            { id: "https://ia803107.us.archive.org/32/items/Mostafa_Ismaeel_128kbps_Everyayah/", name: "مصطفى اسماعيل" },
+            { id: "Nasser_Alqatami_128kbps", name: "ناصر القطامي" },
+            { id: "Hani_Rifai_192kbps", name: "هاني الرفاعي" }
+        ];
+
         const surahSelect = document.getElementById('surahSelect');
         const startSelect = document.getElementById('startAyah');
         const endSelect = document.getElementById('endAyah');
         const reciterSelect = document.getElementById('reciterSelect');
         const mergeBtn = document.getElementById('mergeBtn');
         const statusBox = document.getElementById('statusBox');
-        const progressBar = document.getElementById('progressBar');
-        const statusText = document.getElementById('statusText');
+        const progressPercent = document.getElementById('progressPercent');
         const playerBox = document.getElementById('playerBox');
         const mainAudio = document.getElementById('mainAudio');
 
         let audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
         async function init() {
+            reciters.forEach(r => {
+                const opt = document.createElement('option');
+                opt.value = r.id;
+                opt.textContent = r.name;
+                reciterSelect.appendChild(opt);
+            });
+
             const res = await fetch('https://api.alquran.cloud/v1/surah');
             const data = await res.json();
-            data.data.forEach((s, index) => {
+            data.data.forEach((s) => {
                 const opt = document.createElement('option');
                 opt.value = s.number;
-                opt.textContent = `${index + 1}. ${s.name}`;
+                opt.textContent = `${s.number}. ${s.name}`;
                 opt.dataset.max = s.numberOfAyahs;
                 surahSelect.appendChild(opt);
             });
@@ -128,40 +219,29 @@ html
             for (let i = 1; i <= max; i++) {
                 const opt = document.createElement('option');
                 opt.value = i;
-                opt.textContent = `الآية ${i}`;
+                opt.textContent = i;
                 startSelect.appendChild(opt);
             }
-            startSelect.value = 1;
             updateEndAyahList();
         }
 
         function updateEndAyahList() {
             const max = parseInt(surahSelect.options[surahSelect.selectedIndex].dataset.max);
             const startVal = parseInt(startSelect.value) || 1;
-            const currentEndVal = parseInt(endSelect.value);
-            
             endSelect.innerHTML = '';
             for (let i = startVal; i <= max; i++) {
                 const opt = document.createElement('option');
                 opt.value = i;
-                opt.textContent = `الآية ${i}`;
+                opt.textContent = i;
                 endSelect.appendChild(opt);
             }
-
-            if (currentEndVal >= startVal && currentEndVal <= max) {
-                endSelect.value = currentEndVal;
-            } else {
-                endSelect.value = max;
-            }
+            endSelect.value = max;
         }
 
         function getAudioUrl(reciter, surah, ayah) {
             const s = surah.toString().padStart(3, '0');
             const a = ayah.toString().padStart(3, '0');
-            if (reciter.startsWith('http')) {
-                return `${reciter}${s}${a}.mp3`;
-            }
-            return `https://www.everyayah.com/data/${reciter}/${s}${a}.mp3`;
+            return reciter.startsWith('http') ? `${reciter}${s}${a}.mp3` : `https://www.everyayah.com/data/${reciter}/${s}${a}.mp3`;
         }
 
         mergeBtn.onclick = async () => {
@@ -169,105 +249,85 @@ html
             const start = parseInt(startSelect.value);
             const end = parseInt(endSelect.value);
             const reciter = reciterSelect.value;
-            const overlap = 0.1;
 
             mergeBtn.disabled = true;
             statusBox.classList.remove('hidden');
             playerBox.classList.add('hidden');
-
             let buffers = [];
 
             try {
                 for (let i = start; i <= end; i++) {
                     const url = getAudioUrl(reciter, surah, i);
-                    statusText.textContent = `جاري تحميل الآية ${i}...`;
-                    const percent = ((i - start + 1) / (end - start + 1)) * 80;
-                    progressBar.style.width = percent + '%';
+                    const percent = Math.floor(((i - start + 1) / (end - start + 1)) * 100);
+                    progressPercent.textContent = percent + '%';
 
                     const response = await fetch(url);
+                    if (!response.ok) throw new Error();
                     const arrayBuffer = await response.arrayBuffer();
                     const decodedBuffer = await audioCtx.decodeAudioData(arrayBuffer);
                     buffers.push(decodedBuffer);
                 }
 
-                statusText.textContent = "جاري الدمج النهائي...";
-                const mergedBuffer = mergeBuffersPreservingContent(buffers, overlap);
-                const finalBlob = bufferToWav(mergedBuffer);
-                const finalUrl = URL.createObjectURL(finalBlob);
-
-                mainAudio.src = finalUrl;
+                const mergedBuffer = mergeBuffers(buffers, 0.1);
+                const currentBlob = bufferToWav(mergedBuffer);
+                mainAudio.src = URL.createObjectURL(currentBlob);
+                
                 playerBox.classList.remove('hidden');
                 statusBox.classList.add('hidden');
             } catch (err) {
-                alert("حدث خطأ في الشبكة أو القارئ المختار غير متاح حالياً");
+                console.error(err);
             } finally {
                 mergeBtn.disabled = false;
             }
         };
 
-        function mergeBuffersPreservingContent(buffers, overlapTime) {
+        function mergeBuffers(buffers, overlapSec) {
             const sampleRate = buffers[0].sampleRate;
-            const overlapSamples = Math.floor(overlapTime * sampleRate);
-            
-            let totalLength = 0;
-            for (let i = 0; i < buffers.length; i++) {
-                totalLength += buffers[i].length;
-            }
-            totalLength -= (buffers.length - 1) * overlapSamples;
+            const overlap = Math.floor(overlapSec * sampleRate);
+            let totalLength = buffers.reduce((acc, b) => acc + b.length, 0) - (buffers.length - 1) * overlap;
+            const output = audioCtx.createBuffer(buffers[0].numberOfChannels, totalLength, sampleRate);
 
-            const merged = audioCtx.createBuffer(buffers[0].numberOfChannels, totalLength, sampleRate);
-
-            for (let channel = 0; channel < buffers[0].numberOfChannels; channel++) {
-                const channelData = merged.getChannelData(channel);
-                let currentOffset = 0;
-
-                for (let i = 0; i < buffers.length; i++) {
-                    const bData = buffers[i].getChannelData(channel);
-                    
+            for (let ch = 0; ch < output.numberOfChannels; ch++) {
+                const outData = output.getChannelData(ch);
+                let offset = 0;
+                buffers.forEach((b, i) => {
+                    const bData = b.getChannelData(ch);
                     for (let j = 0; j < bData.length; j++) {
-                        if (i > 0 && j < overlapSamples) {
-                            const fadeWeight = j / overlapSamples;
-                            const prevIndex = currentOffset - overlapSamples + j;
-                            channelData[prevIndex] = (channelData[prevIndex] * (1 - fadeWeight)) + (bData[j] * fadeWeight);
+                        if (i > 0 && j < overlap) {
+                            const weight = j / overlap;
+                            outData[offset - overlap + j] = (outData[offset - overlap + j] * (1 - weight)) + (bData[j] * weight);
                         } else {
-                            const targetIndex = currentOffset + (i > 0 ? j - overlapSamples : j);
-                            channelData[targetIndex] = bData[j];
+                            outData[offset + (i > 0 ? j - overlap : j)] = bData[j];
                         }
                     }
-                    currentOffset += bData.length - (i < buffers.length - 1 ? overlapSamples : 0);
-                }
+                    offset += bData.length - (i < buffers.length - 1 ? overlap : 0);
+                });
             }
-            return merged;
+            return output;
         }
 
         function bufferToWav(abuffer) {
-            let numOfChan = abuffer.numberOfChannels,
-                length = abuffer.length * numOfChan * 2 + 44,
-                buffer = new ArrayBuffer(length), view = new DataView(buffer),
-                channels = [], i, sample, offset = 0, pos = 0;
-
-            const setUint16 = (data) => { view.setUint16(pos, data, true); pos += 2; };
-            const setUint32 = (data) => { view.setUint32(pos, data, true); pos += 4; };
-
-            setUint32(0x46464952); setUint32(length - 8); setUint32(0x45564157);
-            setUint32(0x20746d66); setUint32(16); setUint16(1); setUint16(numOfChan);
-            setUint32(abuffer.sampleRate); setUint32(abuffer.sampleRate * 2 * numOfChan);
-            setUint16(numOfChan * 2); setUint16(16); setUint32(0x61746164); setUint32(length - pos - 4);
-
-            for (i = 0; i < abuffer.numberOfChannels; i++) channels.push(abuffer.getChannelData(i));
-            while (pos < length) {
-                for (i = 0; i < numOfChan; i++) {
-                    sample = Math.max(-1, Math.min(1, channels[i][offset]));
-                    sample = (sample < 0 ? sample * 0x8000 : sample * 0x7FFF);
-                    view.setInt16(pos, sample, true); pos += 2;
+            let n = abuffer.numberOfChannels, len = abuffer.length * n * 2 + 44,
+                buf = new ArrayBuffer(len), view = new DataView(buf),
+                ch = [], i, s, off = 0, p = 0;
+            const u16 = (d) => { view.setUint16(p, d, true); p += 2; };
+            const u32 = (d) => { view.setUint32(p, d, true); p += 4; };
+            u32(0x46464952); u32(len - 8); u32(0x45564157); u32(0x20746d66);
+            u32(16); u16(1); u16(n); u32(abuffer.sampleRate); u32(abuffer.sampleRate * 2 * n);
+            u16(n * 2); u16(16); u32(0x61746164); u32(len - p - 4);
+            for (i = 0; i < n; i++) ch.push(abuffer.getChannelData(i));
+            while (p < len) {
+                for (i = 0; i < n; i++) {
+                    s = Math.max(-1, Math.min(1, ch[i][off]));
+                    s = s < 0 ? s * 0x8000 : s * 0x7FFF;
+                    view.setInt16(p, s, true); p += 2;
                 }
-                offset++;
+                off++;
             }
-            return new Blob([buffer], { type: 'audio/wav' });
+            return new Blob([buf], { type: 'audio/wav' });
         }
 
         init();
     </script>
 </body>
 </html>
-
