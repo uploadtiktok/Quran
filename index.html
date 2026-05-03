@@ -1,196 +1,190 @@
-
+```html
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>مجمع التلاوات الملكي</title>
+    <title>مجمع التلاوات الحضاري</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Reem+Kufi:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --gold-primary: #d4af37;
-            --gold-dark: #aa841e;
-            --bg-dark: #050505;
-            --card-bg: #0f0f0f;
+            --deep-emerald: #022c22;
+            --royal-gold: #c5a059;
+            --soft-cream: #fdfaf3;
         }
         body {
-            font-family: 'Reem Kufi', sans-serif;
-            height: 100vh;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            margin: 0;
-            background-color: var(--bg-dark);
-            background-image: 
-                radial-gradient(circle at center, rgba(212, 175, 55, 0.05) 0%, transparent 70%),
-                url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l2.5 12.5L45 15l-12.5 2.5L30 30l-2.5-12.5L15 15l12.5-2.5z' fill='%23d4af37' fill-opacity='0.03'/%3E%3C/svg%3E");
-        }
-        .quran-font {
-            font-family: 'Amiri', serif;
-        }
-        .top-section {
-            padding: 15px 10px;
-            width: 100%;
+            font-family: 'Aref Ruqaa', serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #022c22 0%, #064e3b 100%);
             display: flex;
             flex-direction: column;
             align-items: center;
-        }
-        .islamic-border {
-            position: relative;
-            width: 95%;
-            max-width: 400px;
+            justify-content: center;
             padding: 20px;
-            background: var(--card-bg);
-            border-radius: 20px;
-            border: 1.5px solid var(--gold-primary);
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.1);
-            margin-top: 10px;
+            margin: 0;
+            color: var(--soft-cream);
+            overflow-x: hidden;
         }
-        .islamic-border::before {
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 0 L60 40 L100 50 L60 60 L50 100 L40 60 L0 50 L40 40 Z' fill='%23c5a059' fill-opacity='0.05'/%3E%3C/svg%3E");
+            z-index: -1;
+        }
+        .main-card {
+            width: 100%;
+            max-width: 450px;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(197, 160, 89, 0.3);
+            border-radius: 40px;
+            padding: 50px 30px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+        .main-card::after {
             content: "";
             position: absolute;
-            top: 6px;
-            left: 6px;
-            right: 6px;
-            bottom: 6px;
-            border: 1px solid var(--gold-dark);
-            border-radius: 16px;
+            inset: 15px;
+            border: 1px solid rgba(197, 160, 89, 0.15);
+            border-radius: 30px;
             pointer-events: none;
-            opacity: 0.2;
         }
-        .corner-decoration {
-            position: absolute;
-            width: 30px;
-            height: 30px;
-            border: 2px solid var(--gold-primary);
+        .header-title {
+            font-size: 2.8rem;
+            background: linear-gradient(to bottom, #fdfaf3, #c5a059);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
         }
-        .top-right { top: -4px; right: -4px; border-bottom: none; border-left: none; border-radius: 0 10px 0 0; }
-        .top-left { top: -4px; left: -4px; border-bottom: none; border-right: none; border-radius: 10px 0 0 0; }
-        .bottom-right { bottom: -4px; right: -4px; border-top: none; border-left: none; border-radius: 0 0 10px 0; }
-        .bottom-left { bottom: -4px; left: -4px; border-top: none; border-right: none; border-radius: 0 0 0 10px; }
-
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .form-label {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--royal-gold);
+            margin-bottom: 8px;
+            margin-right: 15px;
+            letter-spacing: 1px;
+        }
         select {
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23d4af37'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: left 0.8rem center;
-            background-size: 1rem;
-            border: 1px solid #2a2a2a;
-            padding: 12px;
-            border-radius: 10px;
             width: 100%;
-            font-size: 16px;
-            background-color: #151515;
-            color: #ffffff !important;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(197, 160, 89, 0.2);
+            border-radius: 18px;
+            padding: 15px 20px;
+            color: #fff;
+            font-size: 1.1rem;
             outline: none;
-        }
-        .bottom-section {
-            width: 100%;
-            max-width: 400px;
-            margin: 0 auto;
-            padding: 15px 20px 30px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        #mergeBtn {
-            background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
-            color: #000;
-            padding: 18px;
-            border-radius: 15px;
-            font-weight: bold;
-            width: 100%;
-            border: none;
-            font-size: 18px;
             cursor: pointer;
-            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.2);
+            transition: all 0.3s ease;
+            appearance: none;
+        }
+        select:focus {
+            border-color: var(--royal-gold);
+            background: rgba(197, 160, 89, 0.05);
+        }
+        .btn-generate {
+            width: 100%;
+            background: linear-gradient(45deg, #c5a059, #e2c28a);
+            color: #022c22;
+            font-weight: 700;
+            padding: 20px;
+            border-radius: 20px;
+            font-size: 1.2rem;
+            margin-top: 20px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        .btn-generate:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(197, 160, 89, 0.3);
         }
         audio {
             width: 100%;
-            height: 45px;
-            filter: invert(100%) hue-rotate(180deg) brightness(1.2);
-            border-radius: 20px;
+            margin-top: 25px;
+            filter: sepia(100%) saturate(200%) hue-rotate(5deg) invert(90%);
         }
-        label {
-            color: var(--gold-primary);
-            margin-bottom: 6px;
-            display: block;
-            font-size: 13px;
+        .status-indicator {
+            display: none;
+            text-align: center;
+            margin-top: 15px;
+            color: var(--royal-gold);
+            font-size: 0.9rem;
         }
-        .title-glow {
-            text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+        .progress-bar-container {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+        .progress-bar-fill {
+            width: 0%;
+            height: 100%;
+            background: var(--royal-gold);
+            transition: width 0.3s ease;
         }
     </style>
 </head>
 <body>
 
-    <div class="top-section">
-        <div class="text-center mb-4">
-            <div class="quran-font text-5xl text-amber-500 mb-2">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</div>
-            <h1 class="text-2xl font-bold quran-font text-white title-glow">مجمع التلاوات العطرة</h1>
+    <div class="main-card">
+        <div class="text-center mb-10">
+            <h1 class="header-title">مجمع التلاوات</h1>
+            <div class="w-12 h-1 bg-royal-gold mx-auto mb-2 opacity-50 rounded-full"></div>
+            <p class="text-xs uppercase tracking-widest opacity-60">توليد ملفات صوتية للآيات الكريمة</p>
         </div>
 
-        <div class="islamic-border">
-            <div class="corner-decoration top-right"></div>
-            <div class="corner-decoration top-left"></div>
-            <div class="corner-decoration bottom-right"></div>
-            <div class="corner-decoration bottom-left"></div>
+        <div class="form-group">
+            <label class="form-label">القارئ المفضل</label>
+            <select id="reciterSelect"></select>
+        </div>
 
-            <div class="space-y-4">
-                <div>
-                    <label>القارئ</label>
-                    <select id="reciterSelect"></select>
-                </div>
+        <div class="form-group">
+            <label class="form-label">السورة الكريمة</label>
+            <select id="surahSelect"></select>
+        </div>
 
-                <div>
-                    <label>السورة</label>
-                    <select id="surahSelect" class="quran-font"></select>
-                </div>
-
-                <div class="grid grid-cols-2 gap-4">
-                    <div>
-                        <label>من الآية</label>
-                        <select id="startAyah"></select>
-                    </div>
-                    <div>
-                        <label>إلى الآية</label>
-                        <select id="endAyah"></select>
-                    </div>
-                </div>
+        <div class="grid grid-cols-2 gap-4">
+            <div class="form-group">
+                <label class="form-label">من الآية</label>
+                <select id="startAyah"></select>
+            </div>
+            <div class="form-group">
+                <label class="form-label">إلى الآية</label>
+                <select id="endAyah"></select>
             </div>
         </div>
-    </div>
 
-    <div class="bottom-section">
-        <div id="statusBox" class="hidden text-center text-sm text-amber-400 font-bold animate-pulse">
-             جاري جمع الآيات... <span id="progressPercent">0%</span>
+        <button id="mergeBtn" class="btn-generate">توليد المقطع الصوتي</button>
+
+        <div id="statusBox" class="status-indicator">
+            <span>جاري معالجة الآيات الكريمة... <span id="progressPercent">0%</span></span>
+            <div class="progress-bar-container">
+                <div id="progressFill" class="progress-bar-fill"></div>
+            </div>
         </div>
 
         <div id="playerBox" class="hidden">
             <audio id="mainAudio" controls></audio>
         </div>
-
-        <button id="mergeBtn" class="quran-font">بِدء التوليد</button>
     </div>
 
     <script>
         const reciters = [
             { id: "Yasser_Ad-Dussary_128kbps", name: "ياسر الدوسري" },
             { id: "MaherAlMuaiqly128kbps", name: "ماهر المعيقلي" },
-            { id: "Abu%20Bakr%20Ash-Shaatree_128kbps", name: "ابوبكر الشاطري" },
-            { id: "Ibrahim_Akhdar_32kbps", name: "ابراهيم الاخضر" },
-            { id: "Ahmed_ibn_Ali_al-Ajamy_128kbps_ketaballah.net", name: "احمد العجمي" },
-            { id: "https://ia800502.us.archive.org/12/items/Ayman_Sowaid_64kbps---6236---ayat/", name: "أيمن رشدي سويد" },
-            { id: "https://ia803100.us.archive.org/12/items/Bandar_Baleela_128kbps_Everyayah/", name: "بندر بليلة" },
-            { id: "Saood%20bin%20Ibraaheem%20Ash-Shuraym_128kbps", name: "سعود الشريم" },
-            { id: "Ghamadi_40kbps", name: "سعد الغامدي" },
-            { id: "Abdul_Basit_Murattal_192kbps", name: "عبدالباسط مرتل" },
-            { id: "Abdul_Basit_Mujawwad_128kbps", name: "عبدالباسط مجود" },
-            { id: "Abdurrahmaan_As-Sudais_192kbps", name: "عبدالرحمن السديس" },
-            { id: "Abdullah_Basfar_192kbps", name: "عبدالله بصفر" },
-            { id: "Ali_Jaber_64kbps", name: "علي جابر" },
-            { id: "Hudhaify_128kbps", name: "علي الحذيفي" },
+            { id: "Abu%20Bakr%20Ash-Shaatree_128kbps", name: "أبوبكر الشاطري" },
+            { id: "Ibrahim_Akhdar_32kbps", name: "إبراهيم الأخضر" },
+            { id: "Ahmed_ibn_Ali_al-Ajamy_128kbps_ketaballah.net", name: "أحمد العجمي" },
+            { id: "Abdul_Basit_Murattal_192kbps", name: "عبد الباسط عبد الصمد" },
+            { id: "Abdurrahmaan_As-Sudais_192kbps", name: "عبد الرحمن السديس" },
             { id: "Fares_Abbad_64kbps", name: "فارس عباد" },
             { id: "Husary_128kbps", name: "محمود خليل الحصري" },
             { id: "Minshawy_Murattal_128kbps", name: "محمد صديق المنشاوي" },
@@ -203,6 +197,7 @@
         const reciterSelect = document.getElementById('reciterSelect');
         const mergeBtn = document.getElementById('mergeBtn');
         const statusBox = document.getElementById('statusBox');
+        const progressFill = document.getElementById('progressFill');
         const progressPercent = document.getElementById('progressPercent');
         const playerBox = document.getElementById('playerBox');
         const mainAudio = document.getElementById('mainAudio');
@@ -254,7 +249,7 @@
                 opt.textContent = i;
                 endSelect.appendChild(opt);
             }
-            endSelect.value = max;
+            endSelect.value = startVal; 
         }
 
         function getAudioUrl(reciter, surah, ayah) {
@@ -270,7 +265,7 @@
             const reciter = reciterSelect.value;
 
             mergeBtn.disabled = true;
-            statusBox.classList.remove('hidden');
+            statusBox.style.display = 'block';
             playerBox.classList.add('hidden');
             let buffers = [];
 
@@ -279,6 +274,7 @@
                     const url = getAudioUrl(reciter, surah, i);
                     const percent = Math.floor(((i - start + 1) / (end - start + 1)) * 100);
                     progressPercent.textContent = percent + '%';
+                    progressFill.style.width = percent + '%';
 
                     const response = await fetch(url);
                     if (!response.ok) throw new Error();
@@ -292,7 +288,7 @@
                 mainAudio.src = URL.createObjectURL(currentBlob);
                 
                 playerBox.classList.remove('hidden');
-                statusBox.classList.add('hidden');
+                statusBox.style.display = 'none';
             } catch (err) {
                 console.error(err);
             } finally {
@@ -350,3 +346,5 @@
     </script>
 </body>
 </html>
+
+```
